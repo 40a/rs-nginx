@@ -9,7 +9,6 @@ ENV LUAJIT_LIB=/usr/lib
 ENV LUAJIT_INC=/usr/include/luajit-2.1
 ENV NGX_BROTLI_COMMIT bfd2885b2da4d763fed18f49216bb935223cd34b
 # https://github.com/openresty/headers-more-nginx-module/releases
-ENV HEADERS_MORE_VERSION=0.33
 
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
@@ -94,7 +93,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
 	&& curl -fSL https://github.com/simpl/ngx_devel_kit/archive/v$DEVEL_KIT_MODULE_VERSION.tar.gz -o ndk.tar.gz \
   	&& curl -fSL https://github.com/openresty/lua-nginx-module/archive/v$LUA_MODULE_VERSION.tar.gz -o lua.tar.gz \
-	&& curl -fSL https://github.com/openresty/headers-more-nginx-module/archive/v$HEADERS_MORE_VERSION.tar.gz -o headers-more-nginx-module-$HEADERS_MORE_MODULE_PATH.tar.gz \
 	&& sha512sum nginx.tar.gz nginx.tar.gz.asc \
 	&& export GNUPGHOME="$(mktemp -d)" \
 	&& gpg --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$GPG_KEYS" \
@@ -104,8 +102,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& tar -zxC /usr/src -f nginx.tar.gz \
 	&& tar -zxC /usr/src -f ndk.tar.gz \
 	&& tar -zxC /usr/src -f lua.tar.gz \
-	&& tar -zxC /usr/src -f headers-more-nginx-module-$HEADERS_MORE_MODULE_PATH.tar.gz \
-	&& rm nginx.tar.gz ndk.tar.gz lua.tar.gz headers-more-nginx-module-$HEADERS_MORE_MODULE_PATH.tar.gz \
+	&& rm nginx.tar.gz ndk.tar.gz lua.tar.gz \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
 	&& ./configure $CONFIG --with-debug \
 	&& make -j$(getconf _NPROCESSORS_ONLN) \
