@@ -2,7 +2,7 @@ FROM alpine:3.8
 
 MAINTAINER NGINX Docker Maintainers "info@romanoffstudio.me"
 
-ENV NGINX_VERSION 1.13.6
+ENV NGINX_VERSION 1.15.7
 ENV LUA_MODULE_VERSION 0.10.13
 ENV DEVEL_KIT_MODULE_VERSION 0.3.0
 ENV LUAJIT_LIB=/usr/lib
@@ -58,7 +58,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 		--add-module=/usr/src/ngx_devel_kit-$DEVEL_KIT_MODULE_VERSION \
     	--add-module=/usr/src/lua-nginx-module-$LUA_MODULE_VERSION \
     	--add-module=/usr/src/ngx_brotli \
-    	--add-module=/usr/src/headers-more-nginx-module-$HEADERS_MORE_VERSION \
         --with-cc-opt=-Wno-error \
 	" \
 	&& addgroup -S nginx \

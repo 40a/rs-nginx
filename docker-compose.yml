@@ -1,7 +1,7 @@
 version: "3"
 services:
   nginx:
-    image: romanoffs/rs-nginx:latest
+    image: romanoffs/rs-nginx:1.15.7
     ports:
       - 8000:80
     volumes:
